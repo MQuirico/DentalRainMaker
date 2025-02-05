@@ -7,6 +7,7 @@ import { AppointmentList } from '@/components/patientDashboard/appointment-list'
 import { TreatmentProgress } from '@/components/patientDashboard/components_treatment-progress'
 import { MetricsCards } from '@/components/patientDashboard/components_metrics-cards'
 import { RootState } from '@/redux/store'
+import { useEffect, useState } from 'react'
 
 const metadata: Metadata = {
   title: 'Dashboard | Dental Rain Maker',
@@ -14,12 +15,20 @@ const metadata: Metadata = {
 }
 
 export default function DashboardPage() {
-  const { given_name } = useSelector((state: RootState) => state.user)
+  const [loading, setLoading] = useState(true)
+  const { family_name } = useSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 4000)
+  }, [])
 
   return (
-    <div className='absolute right-0 overflow-y-scroll lg:left-0 lg:top-[10vh] lg:max-w-[100%]'>
+    <div className='absolute left-3 right-0 top-[15vh] overflow-y-scroll lg:left-0 lg:top-[10vh] lg:max-w-[100%]'>
       <DashboardHeader
-        heading={`Welcome back, ${given_name}`}
+        loading={loading}
+        heading={`Welcome back, ${family_name}`}
         text='Manage your dental care journey'
       />
       <div className='grid gap-6 overflow-y-scroll'>

@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Search, Filter, Calendar, SmileIcon as Tooth } from 'lucide-react'
-import { DashboardShell } from '@/components/patientDashboard/dashboard-shell'
+import BeatLoader from 'react-spinners/BeatLoader'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import {
@@ -55,11 +55,19 @@ const mockTreatments: Treatment[] = [
 export default function RecordsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [treatments, setTreatments] = useState<Treatment[]>(mockTreatments)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTreatments(mockTreatments)
+      setLoading(false)
+    }, 2000) // 2000 milliseconds = 2 seconds
+  }, [])
 
   return (
     <div className='absolute left-0 mx-auto p-6 lg:max-w-[100%]'>
       <div className='mb-6 flex items-center justify-between'>
-        <div>
+        <div className='flex w-[100%] flex-col items-center'>
           <h1 className='text-2xl font-semibold text-gray-900'>
             Treatment Records
           </h1>
@@ -72,7 +80,7 @@ export default function RecordsPage() {
       {/* Filters Section */}
       <Card className='mb-6'>
         <CardContent className='p-4'>
-          <div className='flex flex-wrap gap-4'>
+          <div className='flex flex-col flex-wrap items-center gap-4'>
             <div className='min-w-[200px] flex-1'>
               <div className='relative'>
                 <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400' />
@@ -85,7 +93,7 @@ export default function RecordsPage() {
               </div>
             </div>
             <Select>
-              <SelectTrigger className='w-[180px]'>
+              <SelectTrigger className='w-[100%]'>
                 <SelectValue placeholder='Filter by Procedure' />
               </SelectTrigger>
               <SelectContent>
@@ -96,7 +104,7 @@ export default function RecordsPage() {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className='w-[180px]'>
+              <SelectTrigger className='w-[100%]'>
                 <SelectValue placeholder='Filter by Dentist' />
               </SelectTrigger>
               <SelectContent>
@@ -105,7 +113,10 @@ export default function RecordsPage() {
                 <SelectItem value='johnson'>Dr. Johnson</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant='outline' className='flex items-center gap-2'>
+            <Button
+              variant='outline'
+              className='flex w-[60%] flex-col items-center gap-2 self-center'
+            >
               <Filter className='h-4 w-4' />
               More Filters
             </Button>
@@ -114,44 +125,48 @@ export default function RecordsPage() {
       </Card>
 
       {/* Records List */}
-      <div className='space-y-4'>
-        {treatments.map((treatment) => (
-          <Card
-            key={treatment.id}
-            className='transition-colors hover:bg-gray-50'
-          >
-            <CardContent className='p-6'>
-              <div className='flex items-start justify-between'>
-                <div className='flex items-start gap-4'>
-                  <div className='rounded-lg bg-blue-100 p-3'>
-                    <Tooth className='h-6 w-6 text-blue-600' />
-                  </div>
-                  <div>
-                    <h3 className='text-lg font-semibold text-gray-900'>
-                      {treatment.procedure}
-                    </h3>
-                    <div className='mt-1 flex items-center gap-2 text-sm text-gray-500'>
-                      <Calendar className='h-4 w-4' />
-                      {new Date(treatment.date).toLocaleDateString()}
+      <div className='flex flex-col space-y-4'>
+        {loading ? (
+          <BeatLoader color='blue' className='self-center' />
+        ) : (
+          treatments.map((treatment) => (
+            <Card
+              key={treatment.id}
+              className='transition-colors hover:bg-gray-50'
+            >
+              <CardContent className='p-6'>
+                <div className='flex items-start justify-between'>
+                  <div className='flex items-start gap-4'>
+                    <div className='rounded-lg bg-blue-100 p-3'>
+                      <Tooth className='h-6 w-6 text-blue-600' />
                     </div>
-                    <p className='mt-2 text-sm text-gray-600'>
-                      {treatment.notes}
+                    <div>
+                      <h3 className='text-lg font-semibold text-gray-900'>
+                        {treatment.procedure}
+                      </h3>
+                      <div className='mt-1 flex items-center gap-2 text-sm text-gray-500'>
+                        <Calendar className='h-4 w-4' />
+                        {new Date(treatment.date).toLocaleDateString()}
+                      </div>
+                      <p className='mt-2 text-sm text-gray-600'>
+                        {treatment.notes}
+                      </p>
+                    </div>
+                  </div>
+                  <div className='text-right'>
+                    <p className='font-semibold text-gray-900'>
+                      ${treatment.cost}
                     </p>
+                    <p className='text-sm text-gray-500'>
+                      Tooth: {treatment.tooth}
+                    </p>
+                    <p className='text-sm text-gray-500'>{treatment.dentist}</p>
                   </div>
                 </div>
-                <div className='text-right'>
-                  <p className='font-semibold text-gray-900'>
-                    ${treatment.cost}
-                  </p>
-                  <p className='text-sm text-gray-500'>
-                    Tooth: {treatment.tooth}
-                  </p>
-                  <p className='text-sm text-gray-500'>{treatment.dentist}</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))
+        )}
       </div>
     </div>
   )

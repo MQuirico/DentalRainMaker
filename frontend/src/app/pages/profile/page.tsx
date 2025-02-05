@@ -67,13 +67,11 @@ export default function PatientProfile() {
     state.charAt(0).toUpperCase() + state.slice(1).toLowerCase()
 
   return (
-    <div className='container mx-0 py-2 font-sans sm:mx-auto sm:max-w-4xl sm:py-6 md:overflow-y-hidden lg:max-w-[80%]'>
-      <div className='mb-6 flex items-center justify-between'>
-        <div>
+    <div className='container mx-0 flex w-[80%] flex-col items-center py-2 font-sans sm:mx-auto sm:max-w-4xl sm:py-6 md:overflow-y-hidden lg:max-w-[80%]'>
+      <div className='mb-6 flex flex-col items-center justify-between'>
+        <div className='flex w-[100%] flex-col items-center'>
           <h1 className='text-3xl font-bold tracking-tight'>Patient Profile</h1>
-          <p className='text-muted-foreground'>
-            View and manage patient information
-          </p>
+          <p className='text-center'>View and manage patient information</p>
         </div>
         <Dialog open={isEditing} onOpenChange={setIsEditing}>
           <DialogTrigger asChild>

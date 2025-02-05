@@ -5,7 +5,7 @@ const Header = () => {
   const router = useRouter()
 
   return (
-    <header className='mb-4 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between lg:w-[90%]'>
+    <header className='mb-4 flex flex-col items-center gap-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between lg:w-[90%]'>
       <h1 className='text-xl font-bold sm:text-2xl'>My Appointments</h1>
       <button
         onClick={() =>

@@ -14,7 +14,7 @@ const Filters = ({
   return (
     <div>
       {/* Primary filters */}
-      <div className='mb-4 flex items-center gap-4'>
+      <div className='mb-4 flex flex-row justify-center gap-4'>
         <button
           onClick={() => setPrimaryFilter('History')}
           className={`rounded-lg px-4 py-2 ${
@@ -38,7 +38,7 @@ const Filters = ({
       </div>
 
       {/* Secondary filters */}
-      <div className='mb-4 flex items-center gap-4'>
+      <div className='mb-4 flex flex-row justify-center gap-4'>
         <button
           onClick={() => setSecondaryFilter('All')}
           className={`rounded-lg px-4 py-2 ${

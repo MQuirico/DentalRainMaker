@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { SessionProvider, signOut } from 'next-auth/react'
+import { SessionProvider, signOut, useSession } from 'next-auth/react'
 import { Provider } from 'react-redux'
 import store from '@/redux/store'
 import './globals.css'
@@ -9,6 +9,7 @@ import FirebaseNotification from '@/components/firebaseNotification'
 import AppInitializer from '@/components/appInitializer'
 import SessionAppInitializer from '@/components/sessionAppInitializer'
 import Header from '@/components/patientDashboard/header'
+import { useEffect, useState } from 'react'
 
 export default function RootLayout({
   children,
@@ -34,7 +35,6 @@ export default function RootLayout({
               {/* 🔹 Mueve `useSession()` dentro de SessionProvider */}
               <SessionAppInitializer />
 
-              {/* 🔹 Renderiza el Header inmediatamente */}
               {!excludeHeader.includes(pathname) && (
                 <Header onLogout={handleLogout} />
               )}

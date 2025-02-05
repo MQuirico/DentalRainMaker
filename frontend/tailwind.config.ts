@@ -14,6 +14,9 @@ export default {
 		fontFamily: {
 			sans: ['Sunflower', 'sans-serif'], // Configura la fuente Lalezar
 		},
+		animation: {
+			fadeIn: "fadeIn 3s ease-in-out",
+		  },
 		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
