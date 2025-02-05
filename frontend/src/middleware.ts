@@ -24,8 +24,8 @@ export async function middleware(request: NextRequest) {
   }
 
   if (session && pathname === '/login') {
-    const user = session.user as { type: string }
-    switch (user.type) {
+    const user = session?.user as { type: string }
+    switch (user?.type) {
       case 'PATIENT':
         return NextResponse.redirect(
           new URL('/pages/patientDashboard', request.url),

@@ -55,16 +55,16 @@ const LogoutModal = ({
       <DialogHeader>Logout</DialogHeader>
       <DialogContent>
         <p>Are you sure you want to logout?</p>
-        <DialogFooter>
+        <DialogFooter className='flex flex-row justify-between md:justify-between'>
           <Button
             onClick={() => setLogoutDialog(false)}
-            className='bg-blue-600 text-white'
+            className='w-[40%] bg-blue-600 text-white md:w-[20%]'
           >
             Cancel
           </Button>
           <Button
             onClick={() => handleLogout()}
-            className='bg-red-600 text-white'
+            className='w-[40%] bg-red-600 text-white md:w-[20%]'
           >
             Logout
           </Button>

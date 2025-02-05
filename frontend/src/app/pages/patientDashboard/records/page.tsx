@@ -65,7 +65,7 @@ export default function RecordsPage() {
   }, [])
 
   return (
-    <div className='absolute left-0 mx-auto p-6 lg:max-w-[100%]'>
+    <div className='absolute left-0 mx-auto p-6 lg:w-[100%]'>
       <div className='mb-6 flex items-center justify-between'>
         <div className='flex w-[100%] flex-col items-center'>
           <h1 className='text-2xl font-semibold text-gray-900'>
@@ -80,20 +80,20 @@ export default function RecordsPage() {
       {/* Filters Section */}
       <Card className='mb-6'>
         <CardContent className='p-4'>
-          <div className='flex flex-col flex-wrap items-center gap-4'>
-            <div className='min-w-[200px] flex-1'>
+          <div className='r flex flex-col flex-wrap items-center gap-4 md:flex-row md:content-center'>
+            <div className='flex-1'>
               <div className='relative'>
-                <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400' />
+                <Search className='absolute left-3 top-1/2 h-4 -translate-y-1/2 transform text-gray-400 md:w-[90%]' />
                 <Input
                   placeholder='Search treatments...'
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className='pl-10'
+                  className='pl-10 md:w-[60%]'
                 />
               </div>
             </div>
             <Select>
-              <SelectTrigger className='w-[100%]'>
+              <SelectTrigger className='w-[100%] lg:max-w-[30%]'>
                 <SelectValue placeholder='Filter by Procedure' />
               </SelectTrigger>
               <SelectContent>
@@ -104,7 +104,7 @@ export default function RecordsPage() {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className='w-[100%]'>
+              <SelectTrigger className='w-[100%] lg:max-w-[30%]'>
                 <SelectValue placeholder='Filter by Dentist' />
               </SelectTrigger>
               <SelectContent>
@@ -115,7 +115,7 @@ export default function RecordsPage() {
             </Select>
             <Button
               variant='outline'
-              className='flex w-[60%] flex-col items-center gap-2 self-center'
+              className='flex w-[60%] flex-col items-center gap-2 self-center md:absolute md:left-[15%] md:top-[35%] md:flex-row'
             >
               <Filter className='h-4 w-4' />
               More Filters
